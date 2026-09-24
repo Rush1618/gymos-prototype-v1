@@ -22,12 +22,20 @@ import {
   Activity,
   Zap,
   ShieldCheck,
-  Plus
+  Plus,
+  Maximize2,
+  Unlock,
+  Radio,
+  Dumbbell,
+  Compass,
+  Check
 } from 'lucide-react';
 
 export const OwnerDashboard = () => {
   const { activeGym, activeUser, setActiveTab, canAccessPage, canViewFeature, refreshData, addToast } = useApp();
   const [hoveredHour, setHoveredHour] = useState(null);
+  const [selectedBay, setSelectedBay] = useState(null);
+  const [remoteGateOpen, setRemoteGateOpen] = useState(false);
 
   const members = StorageService.getUsers().filter(u => u.roleId === 'member' && u.gymId === activeGym.id);
   const activeMembers = members.filter(m => m.status === 'ACTIVE');
@@ -41,6 +49,20 @@ export const OwnerDashboard = () => {
   const totalRevenue = payments.filter(p => p.status === 'PAID').reduce((sum, p) => sum + p.amount, 0);
   const monthlyTarget = 400000;
   const targetPercent = Math.min(100, Math.round((totalRevenue / monthlyTarget) * 100));
+
+  // Interactive Facility Floor Blueprint Bays
+  const [bays, setBays] = useState([
+    { id: 'bay_1', name: 'Platform 1', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Rahul Sharma', exercise: 'Heavy Deadlift (210kg)' },
+    { id: 'bay_2', name: 'Platform 2', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Priya Verma', exercise: 'Snatch Technique' },
+    { id: 'bay_3', name: 'Platform 3', type: 'Eleiko Olympic Rig', status: 'available', athlete: null, exercise: null },
+    { id: 'bay_4', name: 'Platform 4', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Arjun Mehta (Coach)', exercise: '1-on-1 Assessment' },
+    { id: 'bay_5', name: 'Platform 5', type: 'Eleiko Olympic Rig', status: 'available', athlete: null, exercise: null },
+    { id: 'bay_6', name: 'Platform 6', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Vikram Malhotra', exercise: 'Front Squats' },
+    { id: 'bay_7', name: 'Platform 7', type: 'Eleiko Olympic Rig', status: 'available', athlete: null, exercise: null },
+    { id: 'bay_8', name: 'Platform 8', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Siddharth Jain', exercise: 'Clean & Jerk' },
+    { id: 'turf_track', name: 'Sprint Turf Lane', type: '30m Calibrated Turf', status: 'occupied', athlete: 'Maya Sen Squad', exercise: 'Sled Pushes & Sprints' },
+    { id: 'recovery_sauna', name: 'Infrared Suite', type: 'Himalayan Salt Sauna', status: 'occupied', athlete: '2 Members In Session', exercise: 'Contrast Heat Therapy' }
+  ]);
 
   // Hourly floor occupancy distribution data (06:00 to 22:00)
   const hourlyTraffic = [
@@ -60,6 +82,17 @@ export const OwnerDashboard = () => {
   const currentAthletesOnFloor = 42;
   const maxFloorCapacity = 60;
   const occupancyRate = Math.round((currentAthletesOnFloor / maxFloorCapacity) * 100);
+
+  // 7-Day Revenue Velocity Sparkline Data
+  const revenueTrend = [
+    { day: 'Mon', rev: 28000 },
+    { day: 'Tue', rev: 35000 },
+    { day: 'Wed', rev: 42000 },
+    { day: 'Thu', rev: 38000 },
+    { day: 'Fri', rev: 64000 },
+    { day: 'Sat', rev: 72000 },
+    { day: 'Sun', rev: 55000 }
+  ];
 
   // Quick Tactical Simulation Handlers
   const handleSimulateQuickScan = () => {
@@ -89,6 +122,16 @@ export const OwnerDashboard = () => {
     try { confetti({ particleCount: 60, spread: 50 }); } catch (e) {}
     refreshData();
     addToast(`⚡ Inbound Lead: ${randomName} added to ${activeGym.name} CRM pipeline!`, 'success');
+  };
+
+  const handleRemoteUnlockGate = () => {
+    SoundEngine.playScanLaserBeep();
+    setTimeout(() => {
+      SoundEngine.playSuccessChime();
+      setRemoteGateOpen(true);
+      addToast(`⚡ Remote Signal Dispatched: Turnstile Gate 01 Released!`, 'success');
+      setTimeout(() => setRemoteGateOpen(false), 4000);
+    }, 300);
   };
 
   return (
@@ -151,7 +194,7 @@ export const OwnerDashboard = () => {
         </div>
       )}
 
-      {/* Operational KPI Grid */}
+      {/* Primary KPI Deck with Micro-Sparklines */}
       <div className="stat-grid">
         {/* Active Members */}
         <div className="stat-card" style={{ borderTop: '3px solid #3b82f6' }}>
@@ -226,6 +269,121 @@ export const OwnerDashboard = () => {
             <span>{leads.length} active prospects in sales pipeline</span>
           </div>
         </div>
+      </div>
+
+      {/* Interactive Facility Floor Blueprint & Telemetry */}
+      <div className="glass-card" style={{ padding: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '12px' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span className="badge badge-purple">CALIBRATED BLUEPRINT</span>
+              <h3 style={{ fontSize: '18px', fontWeight: '800', margin: 0 }}>
+                Athletic Floor Map & Live Bay Utilization
+              </h3>
+            </div>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
+              Click any Olympic drop platform or recovery suite to inspect active athletes, barbell loads, and coach bookings.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff5722' }} /> 6 Occupied
+            </span>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981' }} /> 4 Ready
+            </span>
+          </div>
+        </div>
+
+        {/* Blueprint Grid */}
+        <div className="blueprint-grid">
+          {bays.map(bay => {
+            const isSelected = selectedBay?.id === bay.id;
+            return (
+              <div 
+                key={bay.id}
+                className={`blueprint-bay ${bay.status}`}
+                style={{
+                  border: isSelected ? '2px solid var(--primary)' : undefined,
+                  boxShadow: isSelected ? '0 0 16px rgba(255, 87, 34, 0.4)' : undefined
+                }}
+                onClick={() => {
+                  SoundEngine.playClick();
+                  setSelectedBay(isSelected ? null : bay);
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <strong style={{ fontSize: '12px', color: '#fff' }}>{bay.name}</strong>
+                  <span className={`badge ${bay.status === 'occupied' ? 'badge-danger' : 'badge-success'}`} style={{ fontSize: '8px', padding: '1px 5px' }}>
+                    {bay.status === 'occupied' ? 'ACTIVE' : 'READY'}
+                  </span>
+                </div>
+                <div style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3' }}>
+                  {bay.type}
+                </div>
+                {bay.athlete && (
+                  <div style={{ fontSize: '10px', color: '#ffd600', marginTop: '6px', fontWeight: '600' }}>
+                    ● {bay.athlete}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Selected Bay Inspection Drawer */}
+        {selectedBay && (
+          <div style={{
+            marginTop: '16px',
+            padding: '16px 20px',
+            background: 'var(--bg-dark)',
+            border: '1px solid var(--primary)',
+            borderRadius: 'var(--radius-md)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '14px',
+            animation: 'modalPop 0.2s ease-out'
+          }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Dumbbell size={16} color="var(--primary)" />
+                <strong style={{ fontSize: '14px', color: '#fff' }}>{selectedBay.name} — {selectedBay.type}</strong>
+                <span className={`badge ${selectedBay.status === 'occupied' ? 'badge-danger' : 'badge-success'}`}>
+                  {selectedBay.status.toUpperCase()}
+                </span>
+              </div>
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
+                {selectedBay.athlete 
+                  ? `Active Athlete: ${selectedBay.athlete} • Target Session: ${selectedBay.exercise}`
+                  : 'Platform is sanitized, calibrated, and immediately open for drop-in or scheduled class.'}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button 
+                className="btn btn-secondary btn-sm"
+                onClick={() => {
+                  SoundEngine.playClick();
+                  // toggle status
+                  setBays(bays.map(b => b.id === selectedBay.id ? { ...b, status: b.status === 'occupied' ? 'available' : 'occupied', athlete: b.status === 'occupied' ? null : activeUser.name } : b));
+                  setSelectedBay(null);
+                  addToast(`Platform status updated`, 'info');
+                }}
+              >
+                Toggle Occupancy
+              </button>
+              <button 
+                className="btn btn-primary btn-sm"
+                onClick={() => setSelectedBay(null)}
+              >
+                Close Inspector
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Real-Time Facility Telemetry & Heatmap Widget */}
@@ -319,30 +477,59 @@ export const OwnerDashboard = () => {
         </div>
       </div>
 
-      {/* Tactical Quick Action Deck */}
+      {/* Tactical Quick Action Deck & Turnstile Hardware Release */}
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between', 
         flexWrap: 'wrap', 
-        gap: '12px',
-        padding: '16px 20px',
+        gap: '14px',
+        padding: '18px 22px',
         background: 'var(--bg-card)',
-        border: '1px solid var(--surface-border)',
-        borderRadius: 'var(--radius-md)'
+        border: `1px solid ${remoteGateOpen ? '#10b981' : 'var(--surface-border)'}`,
+        borderRadius: 'var(--radius-md)',
+        boxShadow: remoteGateOpen ? '0 0 24px rgba(16, 185, 129, 0.3)' : 'none',
+        transition: 'all 0.3s'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Zap size={16} color="var(--primary)" />
-          <strong style={{ fontSize: '13px' }}>Tactical Operations Deck:</strong>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ 
+            width: '36px', 
+            height: '36px', 
+            borderRadius: 'var(--radius-sm)', 
+            background: remoteGateOpen ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 87, 34, 0.15)', 
+            color: remoteGateOpen ? '#10b981' : 'var(--primary)',
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center'
+          }}>
+            {remoteGateOpen ? <Unlock size={18} /> : <Zap size={18} />}
+          </div>
+          <div>
+            <strong style={{ fontSize: '14px', color: '#fff' }}>
+              {remoteGateOpen ? 'TURNSTILE 01: GATE RELEASED' : 'Tactical Operations Deck'}
+            </strong>
+            <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+              Hardware Telemetry: Optical Camera Online • RFID Solenoid Ready
+            </div>
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <button 
+            className="btn btn-primary btn-sm"
+            onClick={handleRemoteUnlockGate}
+            style={{ background: remoteGateOpen ? '#10b981' : undefined, borderColor: remoteGateOpen ? '#10b981' : undefined }}
+          >
+            <Unlock size={13} />
+            <span>Remote Unlock Turnstile</span>
+          </button>
+
           <button 
             className="btn btn-secondary btn-sm"
             onClick={handleSimulateQuickScan}
           >
             <QrCode size={13} color="var(--primary)" />
-            <span>Simulate Turnstile Entry</span>
+            <span>Simulate Member QR Tap</span>
           </button>
 
           <button 
@@ -351,17 +538,6 @@ export const OwnerDashboard = () => {
           >
             <Plus size={13} color="#f59e0b" />
             <span>Simulate Inbound Lead</span>
-          </button>
-
-          <button 
-            className="btn btn-secondary btn-sm"
-            onClick={() => {
-              SoundEngine.playClick();
-              setActiveTab('classes');
-            }}
-          >
-            <Calendar size={13} color="#3b82f6" />
-            <span>Manage Schedule</span>
           </button>
         </div>
       </div>
@@ -471,4 +647,3 @@ export const OwnerDashboard = () => {
     </div>
   );
 };
-

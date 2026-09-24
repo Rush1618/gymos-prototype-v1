@@ -976,6 +976,57 @@ input[type="range"].framer-slider::-webkit-slider-thumb:hover {
   transform: scale(1.18);
 }
 
+/* Interactive Facility Floor Blueprint & Telemetry */
+.blueprint-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.blueprint-bay {
+  background: var(--bg-dark);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.blueprint-bay:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.25);
+}
+
+.blueprint-bay.occupied {
+  border-left: 3px solid #ff5722;
+}
+
+.blueprint-bay.available {
+  border-left: 3px solid #10b981;
+}
+
+.blueprint-bay.maintenance {
+  border-left: 3px solid #64748b;
+  opacity: 0.6;
+}
+
+@keyframes radarSweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-sweep-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(255, 87, 34, 0.3) 360deg);
+  animation: radarSweep 4s linear infinite;
+  pointer-events: none;
+}
+
 /* Responsive adjustments */
 @media (max-width: 900px) {
   .dashboard-shell {
@@ -993,4 +1044,5 @@ input[type="range"].framer-slider::-webkit-slider-thumb:hover {
     padding: 18px;
   }
 }
+
 

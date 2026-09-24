@@ -140,5 +140,10 @@ export const SoundEngine = {
       osc.start(now);
       osc.stop(now + 0.04);
     } catch (e) {}
+  },
+
+  // Alias for click sound
+  playClick: function() {
+    this.playClickPop();
   }
 };
