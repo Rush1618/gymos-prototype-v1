@@ -23,6 +23,22 @@ export const AppProvider = ({ children }) => {
   // Active Navigation Tab inside GymOS or SuperAdmin
   const [activeTab, setActiveTab] = useState('overview');
 
+  // Theme Mode: 'light' (White Palette) | 'dark' (Dark Palette) - Default to 'light' per user request
+  const [themeMode, setThemeModeState] = useState(() => StorageService.getThemeMode() || 'light');
+
+  const setThemeMode = useCallback((mode) => {
+    setThemeModeState(mode);
+    StorageService.saveThemeMode(mode);
+  }, []);
+
+  const toggleThemeMode = useCallback(() => {
+    setThemeModeState(prev => {
+      const next = prev === 'light' ? 'dark' : 'light';
+      StorageService.saveThemeMode(next);
+      return next;
+    });
+  }, []);
+
   // UI Toast notifications
   const [toasts, setToasts] = useState([]);
 
@@ -51,24 +67,50 @@ export const AppProvider = ({ children }) => {
   const baseUser = users.find(u => u.id === activeUserId) || users[0];
   const effectiveUser = isImpersonating ? impersonatedUser : baseUser;
 
-  // Apply Dynamic White-Label Brand Theme to document CSS Variables
+  // Apply Dynamic White-Label Brand Theme & White/Dark Palette to document CSS Variables
   useEffect(() => {
-    if (!activeGym || !activeGym.theme) return;
     const root = document.documentElement;
+    root.setAttribute('data-theme', themeMode);
+
+    if (!activeGym || !activeGym.theme) return;
     const theme = activeGym.theme;
 
     root.style.setProperty('--primary', theme.primaryColor || '#ff5722');
     root.style.setProperty('--primary-hover', theme.primaryHover || '#f4511e');
     root.style.setProperty('--secondary', theme.secondaryColor || '#ff9800');
     root.style.setProperty('--accent', theme.accentColor || '#ffd600');
-    root.style.setProperty('--bg-dark', theme.bgDark || '#0d0f12');
-    root.style.setProperty('--bg-card', theme.bgCard || '#151921');
-    root.style.setProperty('--bg-surface', theme.bgSurface || '#1e2430');
-    root.style.setProperty('--text-main', theme.textMain || '#ffffff');
-    root.style.setProperty('--text-muted', theme.textMuted || '#94a3b8');
-    root.style.setProperty('--brand-border', theme.borderColor || 'rgba(255, 87, 34, 0.25)');
     root.style.setProperty('--brand-font', theme.fontFamily || "'Outfit', sans-serif");
-  }, [activeGym]);
+
+    if (themeMode === 'light') {
+      root.style.setProperty('--bg-app', '#f8fafc');
+      root.style.setProperty('--bg-dark', '#f1f5f9');
+      root.style.setProperty('--bg-card', '#ffffff');
+      root.style.setProperty('--bg-surface', '#f8fafc');
+      root.style.setProperty('--text-main', '#0f172a');
+      root.style.setProperty('--text-muted', '#64748b');
+      root.style.setProperty('--surface-border', '#e2e8f0');
+      root.style.setProperty('--surface-border-hover', '#cbd5e1');
+      root.style.setProperty('--brand-border', 'rgba(255, 87, 34, 0.22)');
+      root.style.setProperty('--glass-bg', 'rgba(255, 255, 255, 0.94)');
+      root.style.setProperty('--shadow-sm', '0 1px 2px rgba(15, 23, 42, 0.05)');
+      root.style.setProperty('--shadow-md', '0 4px 12px rgba(15, 23, 42, 0.07)');
+      root.style.setProperty('--shadow-lg', '0 12px 28px rgba(15, 23, 42, 0.1)');
+    } else {
+      root.style.setProperty('--bg-app', '#080a0d');
+      root.style.setProperty('--bg-dark', theme.bgDark || '#0d0f12');
+      root.style.setProperty('--bg-card', theme.bgCard || '#151921');
+      root.style.setProperty('--bg-surface', theme.bgSurface || '#1e2430');
+      root.style.setProperty('--text-main', theme.textMain || '#ffffff');
+      root.style.setProperty('--text-muted', theme.textMuted || '#94a3b8');
+      root.style.setProperty('--surface-border', 'rgba(255, 255, 255, 0.08)');
+      root.style.setProperty('--surface-border-hover', 'rgba(255, 255, 255, 0.16)');
+      root.style.setProperty('--brand-border', theme.borderColor || 'rgba(255, 87, 34, 0.25)');
+      root.style.setProperty('--glass-bg', 'rgba(21, 25, 33, 0.75)');
+      root.style.setProperty('--shadow-sm', '0 1px 2px rgba(0, 0, 0, 0.3)');
+      root.style.setProperty('--shadow-md', '0 4px 12px rgba(0, 0, 0, 0.25)');
+      root.style.setProperty('--shadow-lg', '0 12px 28px rgba(0, 0, 0, 0.35)');
+    }
+  }, [activeGym, themeMode]);
 
   // Start "View As" Impersonation
   const startViewAs = useCallback((roleKey, targetUser = null) => {
@@ -181,6 +223,9 @@ export const AppProvider = ({ children }) => {
     addToast,
     refreshData,
     dataVersion,
+    themeMode,
+    setThemeMode,
+    toggleThemeMode,
     canAccessPage,
     canViewFeature,
     canPerformAction

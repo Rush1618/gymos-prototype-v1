@@ -34,7 +34,7 @@ export const RetentionEngineView = () => {
     RetentionService.logOutreach(activeGym.id, alert.memberId, alert.memberName, msg, channel, activeUser);
     
     refreshData();
-    addToast(`🚀 Re-engagement message dispatched to ${alert.memberName} via ${channel}!`, 'success');
+    addToast(`Re-engagement message sent to ${alert.memberName} via ${channel}.`, 'success');
   };
 
   return (
@@ -52,7 +52,7 @@ export const RetentionEngineView = () => {
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Transparent Rule-Based Retention Engine</h2>
         </div>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', maxWidth: '750px', lineHeight: '1.5' }}>
-          Section 34: Rather than relying on an opaque black-box ML model, GymOS uses strict deterministic behavioral rules:
+          Deterministic churn signals flag members who have dropped below their baseline training consistency:
           <br />
           <code>[Last Visit &gt; 14 Days] + [Historical Average &gt;= 2.0 Visits/Week] = High Churn Risk Signal</code>
         </p>

@@ -94,7 +94,7 @@ export const PermissionSimulator = () => {
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Permission & Access Control Simulator</h2>
         </div>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 5: Interactive test bench. Inspect the exact evaluation pipeline for any gym, user, and permission key.
+          Inspect and audit the multi-tier authorization pipeline across tenant plans, role assignments, and individual user overrides.
         </p>
       </div>
 

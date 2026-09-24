@@ -78,7 +78,7 @@ export const CustomRoles = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Custom Roles Builder</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 10: Extend baseline roles with specialized tenant roles like Nutrition Coach, Sales Manager, or Front Desk Lead.
+            Extend default roles with specialized permissions for specialized personnel such as Nutritionists, Head Coaches, or Sales Managers.
           </p>
         </div>
 

@@ -12,7 +12,7 @@ export const AnalyticsView = () => {
       <div style={{ marginBottom: '24px' }}>
         <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Platform Fleet Analytics</h2>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 35: Agency-wide metrics monitoring ARR velocity, feature utilization density, and aggregate health.
+          Agency-wide telemetry monitoring recurring revenue, tenant feature utilization, and overall network health.
         </p>
       </div>
 

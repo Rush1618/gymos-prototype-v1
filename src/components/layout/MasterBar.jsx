@@ -13,7 +13,9 @@ import {
   ChevronRight,
   Eye,
   Volume2,
-  VolumeX
+  VolumeX,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export const MasterBar = () => {
@@ -31,14 +33,16 @@ export const MasterBar = () => {
     activeUser,
     startViewAs,
     exitViewAs,
-    addToast
+    addToast,
+    themeMode,
+    toggleThemeMode
   } = useApp();
 
   const toggleAudio = () => {
     const isNowMuted = !SoundEngine.toggleSound();
     setMuted(isNowMuted);
     if (!isNowMuted) SoundEngine.playSuccessChime();
-    addToast(isNowMuted ? 'Sound FX Muted' : 'Sound FX Enabled 🔊', 'info', 2000);
+    addToast(isNowMuted ? 'Audio feedback muted' : 'Audio feedback enabled', 'info', 2000);
   };
 
   const handleResetData = () => {
@@ -59,10 +63,10 @@ export const MasterBar = () => {
   return (
     <header className="master-bar">
       <div className="master-left">
-        {/* Agency Logo & Tower Badge */}
+        {/* Agency Logo & Badge */}
         <div className="master-brand-badge">
-          <span>GYMOS</span>
-          <span className="agency-pill">AGENCY TOWER</span>
+          <span>GymOS</span>
+          <span className="agency-pill">Agency Platform</span>
         </div>
 
         {/* Surface Switcher (The 4 Connected Products from Prompt Section 4) */}
@@ -168,6 +172,37 @@ export const MasterBar = () => {
             <option value="member_priya">Member: {memberPriya?.name || 'Priya Sen'} (Active)</option>
           </select>
         </div>
+
+        {/* White / Dark Theme Mode Switcher */}
+        <button 
+          className="btn btn-secondary btn-sm"
+          onClick={() => {
+            SoundEngine.playClick();
+            toggleThemeMode();
+            addToast(`Switched to ${themeMode === 'light' ? 'Dark' : 'Light (White)'} Mode`, 'info', 2000);
+          }}
+          title={themeMode === 'light' ? 'Switch to Dark Mode' : 'Switch to White (Light) Mode'}
+          style={{ 
+            padding: '5px 11px', 
+            fontSize: '11px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '6px',
+            fontWeight: '600'
+          }}
+        >
+          {themeMode === 'light' ? (
+            <>
+              <Sun size={13} style={{ color: '#f59e0b' }} />
+              <span>White Mode</span>
+            </>
+          ) : (
+            <>
+              <Moon size={13} style={{ color: '#818cf8' }} />
+              <span>Dark Mode</span>
+            </>
+          )}
+        </button>
 
         {/* Sound FX Toggle Button */}
         <button 

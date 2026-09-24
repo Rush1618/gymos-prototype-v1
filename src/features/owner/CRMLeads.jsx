@@ -23,7 +23,7 @@ const PIPELINE_STAGES = [
   { key: 'CONTACTED', title: 'Contacted', color: '#f59e0b' },
   { key: 'TRIAL_BOOKED', title: 'Trial Booked', color: '#8b5cf6' },
   { key: 'TRIAL_COMPLETED', title: 'Trial Done', color: '#06b6d4' },
-  { key: 'CONVERTED', title: 'Converted 🎉', color: '#10b981' },
+  { key: 'CONVERTED', title: 'Converted', color: '#10b981' },
   { key: 'LOST', title: 'Lost / Dropped', color: '#64748b' }
 ];
 
@@ -94,7 +94,7 @@ export const CRMLeads = () => {
     setSelectedLeadToConvert(null);
     setLeads(LeadService.getLeadsByGym(activeGym.id));
     refreshData();
-    addToast(`🎉 ${result.member.name} converted to Active Member! Digital Pass: ${result.member.passId}`, 'success');
+    addToast(`${result.member.name} converted to Active Member. Digital Pass: ${result.member.passId}`, 'success');
   };
 
   const handleAddManualLead = (e) => {

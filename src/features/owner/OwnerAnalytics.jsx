@@ -23,7 +23,7 @@ export const OwnerAnalytics = () => {
       <div style={{ marginBottom: '24px' }}>
         <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Tenant Operational Analytics</h2>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 35: Unit-level business performance, funnel conversion velocity, and class occupancy rates for {activeGym.name}.
+          Operational performance metrics, lead conversion velocity, and class occupancy rates for {activeGym.name}.
         </p>
       </div>
 

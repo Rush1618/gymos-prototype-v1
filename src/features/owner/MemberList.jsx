@@ -37,7 +37,7 @@ export const MemberList = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Active Member Directory</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 25: Centralized member profiles, digital passes, attendance consistency, and retention health.
+            Member profiles, digital turnstile passes, visit consistency, and membership status.
           </p>
         </div>
 

@@ -43,10 +43,10 @@ export const OwnerAICoach = () => {
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Sparkles size={20} style={{ color: 'var(--primary)' }} />
-          <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Owner Strategic Intelligence AI</h2>
+          <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Operations Intelligence Assistant</h2>
         </div>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 33: Contextual executive partner evaluating live tenant attendance, leads, revenue velocity, and churn risk.
+          Query live facility attendance, member retention risks, lead pipeline velocity, and cash collection totals.
         </p>
       </div>
 
@@ -79,7 +79,7 @@ export const OwnerAICoach = () => {
               }}
             >
               {m.role === 'assistant' && (
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #ff5722, #ffd600)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', flexShrink: 0 }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', flexShrink: 0 }}>
                   <Bot size={16} />
                 </div>
               )}
@@ -88,7 +88,7 @@ export const OwnerAICoach = () => {
                 padding: '12px 16px',
                 borderRadius: 'var(--radius-md)',
                 background: m.role === 'user' ? 'var(--primary)' : 'var(--bg-dark)',
-                color: '#fff',
+                color: m.role === 'user' ? '#ffffff' : 'var(--text-main)',
                 fontSize: '13px',
                 lineHeight: '1.5',
                 border: m.role === 'user' ? 'none' : '1px solid var(--surface-border)',
@@ -97,20 +97,20 @@ export const OwnerAICoach = () => {
                 {m.content}
 
                 {m.action === 'PRIORITY_SUMMARY' && (
-                  <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                  <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid var(--surface-border)' }}>
                     <button 
                       className="btn btn-sm"
                       style={{ background: '#ef4444', color: '#fff', border: 'none', fontSize: '11px' }}
                       onClick={() => setActiveTab('retention')}
                     >
-                      Open Retention Engine ➔
+                      Open Retention Engine
                     </button>
                   </div>
                 )}
               </div>
 
               {m.role === 'user' && (
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', flexShrink: 0 }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--bg-surface)', border: '1px solid var(--surface-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-main)', flexShrink: 0 }}>
                   <User size={16} />
                 </div>
               )}
@@ -119,7 +119,7 @@ export const OwnerAICoach = () => {
 
           {isTyping && (
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #ff5722, #ffd600)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+              <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                 <Bot size={16} />
               </div>
               <div style={{ padding: '8px 14px', background: 'var(--bg-dark)', borderRadius: 'var(--radius-md)', fontSize: '12px', color: 'var(--text-muted)' }}>

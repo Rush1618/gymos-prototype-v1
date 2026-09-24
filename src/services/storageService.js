@@ -33,7 +33,8 @@ const STORAGE_KEYS = {
   NOTIFICATIONS: 'gymos_notifications',
   ACTIVE_GYM_ID: 'gymos_active_gym_id',
   ACTIVE_USER_ID: 'gymos_active_user_id',
-  IMPERSONATED_ROLE: 'gymos_impersonated_role'
+  IMPERSONATED_ROLE: 'gymos_impersonated_role',
+  THEME_MODE: 'gymos_theme_mode'
 };
 
 function getStorageItem(key, fallback) {
@@ -100,6 +101,9 @@ export const StorageService = {
 
   getNotifications: () => getStorageItem(STORAGE_KEYS.NOTIFICATIONS, INITIAL_NOTIFICATIONS),
   saveNotifications: (notifs) => setStorageItem(STORAGE_KEYS.NOTIFICATIONS, notifs),
+
+  getThemeMode: () => getStorageItem(STORAGE_KEYS.THEME_MODE, 'light'),
+  saveThemeMode: (mode) => setStorageItem(STORAGE_KEYS.THEME_MODE, mode),
 
   resetToDefaults: () => {
     Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));

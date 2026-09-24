@@ -83,7 +83,7 @@ export const AttendanceScanner = () => {
       <div style={{ marginBottom: '24px' }}>
         <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Front Desk Attendance & QR Check-in Terminal</h2>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 29: Instant digital QR code validation against real-time membership validity and automated churn recovery.
+          Real-time QR pass and turnstile validation against active membership validity.
         </p>
       </div>
 

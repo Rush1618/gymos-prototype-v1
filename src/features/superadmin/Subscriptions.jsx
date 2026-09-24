@@ -55,7 +55,7 @@ export const Subscriptions = () => {
       <div style={{ marginBottom: '24px' }}>
         <h2 style={{ fontSize: '20px', fontWeight: '800' }}>SaaS Subscription Tiers & Billing</h2>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 14: Manage platform plans, simulated MRR, and feature tier entitlements across gym tenants.
+          Manage recurring subscription tiers, plan entitlements, and tenant billing cycles.
         </p>
       </div>
 

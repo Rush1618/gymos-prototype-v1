@@ -41,7 +41,7 @@ export const TenantBranding = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>White-Label Tenant Branding</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 15: Same product + Tenant configuration. Changes CSS variables & typography dynamically across website and dashboards.
+            Configure custom color palettes, typography, and visual assets dynamically across the tenant's public website and member portals.
           </p>
         </div>
 
@@ -192,27 +192,27 @@ export const TenantBranding = () => {
         </div>
 
         {/* Live Preview Card */}
-        <div className="glass-card" style={{ background: theme.bgDark || '#0d0f12', border: `2px solid ${theme.primaryColor || '#ff5722'}` }}>
+        <div className="glass-card" style={{ background: 'var(--bg-dark)', border: `2px solid ${theme.primaryColor || '#ff5722'}` }}>
           <span style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Live White-Label Preview
           </span>
 
-          <div style={{ marginTop: '20px', padding: '24px', background: theme.bgCard || '#151921', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)' }}>
+          <div style={{ marginTop: '20px', padding: '24px', background: 'var(--bg-card)', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
               <div style={{ width: '36px', height: '36px', background: theme.primaryColor, borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '18px' }}>
                 {activeGym.logo || '⚡'}
               </div>
               <div>
-                <h4 style={{ fontSize: '16px', fontWeight: '800', color: theme.textMain, fontFamily: theme.fontFamily }}>{activeGym.name}</h4>
-                <span style={{ fontSize: '11px', color: theme.textMuted }}>{activeGym.city}</span>
+                <h4 style={{ fontSize: '16px', fontWeight: '800', color: 'var(--text-main)', fontFamily: theme.fontFamily }}>{activeGym.name}</h4>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{activeGym.city}</span>
               </div>
             </div>
 
-            <h3 style={{ fontSize: '20px', fontWeight: '900', color: theme.textMain, fontFamily: theme.fontFamily, lineHeight: '1.2', marginBottom: '8px' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: '900', color: 'var(--text-main)', fontFamily: theme.fontFamily, lineHeight: '1.2', marginBottom: '8px' }}>
               {theme.heroHeadline || 'Transform Your Peak State'}
             </h3>
 
-            <p style={{ fontSize: '13px', color: theme.textMuted, lineHeight: '1.4', marginBottom: '16px', fontFamily: theme.fontFamily }}>
+            <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.4', marginBottom: '16px', fontFamily: theme.fontFamily }}>
               {theme.heroSubheadline || 'World-class facilities and coaching.'}
             </p>
 

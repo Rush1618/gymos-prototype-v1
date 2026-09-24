@@ -14,7 +14,7 @@ export const TrainerList = () => {
       <div style={{ marginBottom: '24px' }}>
         <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Coaching Staff & Personal Trainers</h2>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-          Section 26: Coach specializations, active client loads, and assigned group fitness schedules.
+          Manage trainer assignments, client rosters, and scheduled coaching sessions.
         </p>
       </div>
 

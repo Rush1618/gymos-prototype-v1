@@ -62,7 +62,7 @@ export const MemberPortal = () => {
   const [coachMessages, setCoachMessages] = useState([
     {
       role: 'assistant',
-      content: `Hey ${activeUser.name.split(' ')[0]}! 💪 I'm your IronPulse AI Coach. What are we targeting today? You can ask me to "Create today's workout", "Give me a quick 25-min session", or ask about nutrition and recovery!`
+      content: `Hello ${activeUser.name.split(' ')[0]}. I'm your training assistant for ${activeGym.name}. I have access to your logged sessions, personal records, and health goals. What would you like to review or prepare today?`
     }
   ]);
   const [coachInput, setCoachInput] = useState('');
@@ -161,7 +161,6 @@ export const MemberPortal = () => {
           <button 
             className="btn btn-primary"
             onClick={() => setMemberTab('qr_pass')}
-            style={{ boxShadow: '0 0 16px rgba(255, 87, 34, 0.4)' }}
           >
             <QrCode size={18} />
             <span>Open Mobile QR Pass</span>
@@ -249,7 +248,7 @@ export const MemberPortal = () => {
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     {wo.exercises?.map((ex, i) => (
                       <span key={i} className="badge badge-info" style={{ fontSize: '10px' }}>
-                        {ex.name} ({ex.weightKg}kg) {ex.isPR && '🏆 PR'}
+                        {ex.name} ({ex.weightKg}kg){ex.isPR && ' • PR'}
                       </span>
                     ))}
                   </div>
@@ -260,15 +259,15 @@ export const MemberPortal = () => {
         </div>
       )}
 
-      {/* TAB 2: DIGITAL QR PASS (Section 29) */}
+      {/* TAB 2: DIGITAL QR PASS */}
       {memberTab === 'qr_pass' && (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '20px 0' }}>
           <div className="digital-pass-card" style={{ maxWidth: '380px', width: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '12px' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '6px', background: 'var(--primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>
-                {activeGym.logo || '⚡'}
+              <div style={{ width: '32px', height: '32px', borderRadius: '6px', background: 'var(--primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: '800' }}>
+                {activeGym.logo || 'IP'}
               </div>
-              <h3 style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '0.5px' }}>{activeGym.name}</h3>
+              <h3 style={{ fontSize: '18px', fontWeight: '800', letterSpacing: '0.3px' }}>{activeGym.name}</h3>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
@@ -285,24 +284,14 @@ export const MemberPortal = () => {
               <img 
                 src={activeUser.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'} 
                 alt="" 
-                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', margin: '0 auto', border: '3px solid var(--primary)' }}
+                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', margin: '0 auto', border: '2px solid rgba(255,255,255,0.2)' }}
               />
               <h4 style={{ fontSize: '18px', fontWeight: '800', marginTop: '8px' }}>{activeUser.name}</h4>
               <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{activeUser.membershipPlan || 'Elite Pro'}</span>
             </div>
 
-            {/* Visual Dynamic Scannable QR Code with Hologram Sheen */}
-            <div className="pass-qr-box" style={{ position: 'relative', overflow: 'hidden' }}>
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: '-100%',
-                width: '50%',
-                height: '100%',
-                background: 'linear-gradient(90deg, transparent, rgba(255, 87, 34, 0.3), transparent)',
-                animation: 'holoSheen 3s infinite linear'
-              }} />
-
+            {/* Dynamic Scannable QR Code */}
+            <div className="pass-qr-box" style={{ position: 'relative' }}>
               <svg width="150" height="150" viewBox="0 0 100 100">
                 <rect width="100" height="100" fill="white" />
                 {/* QR Finder patterns */}
@@ -331,7 +320,7 @@ export const MemberPortal = () => {
               {activeUser.passId || 'PASS-IP-7821'}
             </div>
             <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '4px', marginBottom: '16px' }}>
-              Present this optical code at reception scanner or kiosk entry
+              Present this optical pass at the entry turnstile scanner
             </div>
 
             {/* Tap Simulation & Wallet Buttons */}
@@ -346,7 +335,7 @@ export const MemberPortal = () => {
                     setTapStatus('UNLOCKED');
                     try { confetti({ particleCount: 70, spread: 60 }); } catch (e) {}
                     refreshData();
-                    addToast(`⚡ Turnstile Unlocked! Welcome to ${activeGym.name}, ${activeUser.name}.`, 'success');
+                    addToast(`Turnstile unlocked. Welcome to ${activeGym.name}, ${activeUser.name}.`, 'success');
                   } else {
                     SoundEngine.playDenyBuzz();
                     addToast(res.message, 'danger');
@@ -355,14 +344,14 @@ export const MemberPortal = () => {
                 style={{ width: '100%', fontSize: '13px', background: tapStatus === 'UNLOCKED' ? '#10b981' : 'var(--primary)' }}
               >
                 <Zap size={14} />
-                <span>{tapStatus === 'UNLOCKED' ? 'Turnstile Unlocked! (Gate Open)' : 'Simulate Turnstile NFC / QR Tap'}</span>
+                <span>{tapStatus === 'UNLOCKED' ? 'Turnstile Unlocked (Gate Open)' : 'Simulate Turnstile NFC / QR Tap'}</span>
               </button>
 
               <button 
                 className="btn btn-secondary btn-sm"
                 onClick={() => {
                   SoundEngine.playClickPop();
-                  addToast('Pass saved to Apple Wallet & Google Pay profile 📱', 'info');
+                  addToast('Pass saved to Apple Wallet & Google Pay profile', 'info');
                 }}
                 style={{ width: '100%', fontSize: '11px' }}
               >
@@ -505,13 +494,13 @@ export const MemberPortal = () => {
       {memberTab === 'ai_coach' && (
         <div className="glass-card">
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #00e5ff, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
-              <Bot size={20} />
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+              <Bot size={18} />
             </div>
             <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '800' }}>Contextual Member AI Coach</h3>
+              <h3 style={{ fontSize: '16px', fontWeight: '800' }}>Personal Training Assistant</h3>
               <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                Trained on your workout logs, strength milestones, and health goals.
+                Exercise recommendations based on your logged workouts and strength goals.
               </p>
             </div>
           </div>
@@ -533,7 +522,8 @@ export const MemberPortal = () => {
                   padding: '12px 16px',
                   borderRadius: 'var(--radius-md)',
                   background: msg.role === 'user' ? 'var(--primary)' : 'var(--bg-dark)',
-                  color: '#fff',
+                  color: msg.role === 'user' ? '#ffffff' : 'var(--text-main)',
+                  border: msg.role === 'user' ? 'none' : '1px solid var(--surface-border)',
                   fontSize: '13px',
                   lineHeight: '1.5',
                   alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',

@@ -5,7 +5,6 @@ import { RetentionService } from '../../services/retentionService';
 import { AttendanceService } from '../../services/attendanceService';
 import { LeadService } from '../../services/leadService';
 import { SoundEngine } from '../../utils/audio';
-import confetti from 'canvas-confetti';
 import { 
   Users, 
   CreditCard, 
@@ -14,21 +13,13 @@ import {
   TrendingUp, 
   AlertTriangle, 
   ArrowRight, 
-  Sparkles, 
   CheckCircle2, 
   Clock, 
-  Flame,
-  UserCheck,
-  Activity,
-  Zap,
-  ShieldCheck,
-  Plus,
-  Maximize2,
-  Unlock,
-  Radio,
-  Dumbbell,
-  Compass,
-  Check
+  UserCheck, 
+  Activity, 
+  Unlock, 
+  Dumbbell, 
+  Plus 
 } from 'lucide-react';
 
 export const OwnerDashboard = () => {
@@ -50,30 +41,30 @@ export const OwnerDashboard = () => {
   const monthlyTarget = 400000;
   const targetPercent = Math.min(100, Math.round((totalRevenue / monthlyTarget) * 100));
 
-  // Interactive Facility Floor Blueprint Bays
+  // Facility Floor Plan Bays
   const [bays, setBays] = useState([
-    { id: 'bay_1', name: 'Platform 1', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Rahul Sharma', exercise: 'Heavy Deadlift (210kg)' },
-    { id: 'bay_2', name: 'Platform 2', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Priya Verma', exercise: 'Snatch Technique' },
-    { id: 'bay_3', name: 'Platform 3', type: 'Eleiko Olympic Rig', status: 'available', athlete: null, exercise: null },
-    { id: 'bay_4', name: 'Platform 4', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Arjun Mehta (Coach)', exercise: '1-on-1 Assessment' },
-    { id: 'bay_5', name: 'Platform 5', type: 'Eleiko Olympic Rig', status: 'available', athlete: null, exercise: null },
-    { id: 'bay_6', name: 'Platform 6', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Vikram Malhotra', exercise: 'Front Squats' },
-    { id: 'bay_7', name: 'Platform 7', type: 'Eleiko Olympic Rig', status: 'available', athlete: null, exercise: null },
-    { id: 'bay_8', name: 'Platform 8', type: 'Eleiko Olympic Rig', status: 'occupied', athlete: 'Siddharth Jain', exercise: 'Clean & Jerk' },
-    { id: 'turf_track', name: 'Sprint Turf Lane', type: '30m Calibrated Turf', status: 'occupied', athlete: 'Maya Sen Squad', exercise: 'Sled Pushes & Sprints' },
-    { id: 'recovery_sauna', name: 'Infrared Suite', type: 'Himalayan Salt Sauna', status: 'occupied', athlete: '2 Members In Session', exercise: 'Contrast Heat Therapy' }
+    { id: 'bay_1', name: 'Platform 1', type: 'Olympic Rig', status: 'occupied', athlete: 'Rahul Sharma', exercise: 'Deadlift (210kg)' },
+    { id: 'bay_2', name: 'Platform 2', type: 'Olympic Rig', status: 'occupied', athlete: 'Priya Verma', exercise: 'Snatch Practice' },
+    { id: 'bay_3', name: 'Platform 3', type: 'Olympic Rig', status: 'available', athlete: null, exercise: null },
+    { id: 'bay_4', name: 'Platform 4', type: 'Olympic Rig', status: 'occupied', athlete: 'Arjun Mehta', exercise: 'Coaching Session' },
+    { id: 'bay_5', name: 'Platform 5', type: 'Olympic Rig', status: 'available', athlete: null, exercise: null },
+    { id: 'bay_6', name: 'Platform 6', type: 'Olympic Rig', status: 'occupied', athlete: 'Vikram Malhotra', exercise: 'Front Squat' },
+    { id: 'bay_7', name: 'Platform 7', type: 'Olympic Rig', status: 'available', athlete: null, exercise: null },
+    { id: 'bay_8', name: 'Platform 8', type: 'Olympic Rig', status: 'occupied', athlete: 'Siddharth Jain', exercise: 'Clean & Jerk' },
+    { id: 'turf_track', name: 'Turf Track', type: '30m Sled Lane', status: 'occupied', athlete: 'Conditioning Squad', exercise: 'Sled Drills' },
+    { id: 'recovery_sauna', name: 'Sauna Suite', type: 'Infrared Suite', status: 'occupied', athlete: '2 Members In Session', exercise: 'Recovery' }
   ]);
 
   // Hourly floor occupancy distribution data (06:00 to 22:00)
   const hourlyTraffic = [
     { hour: '06h', athletes: 18, label: '06:00 AM' },
-    { hour: '07h', athletes: 54, label: '07:00 AM (Peak Morning Rush)' },
+    { hour: '07h', athletes: 54, label: '07:00 AM (Morning Peak)' },
     { hour: '08h', athletes: 48, label: '08:00 AM' },
     { hour: '09h', athletes: 32, label: '09:00 AM' },
-    { hour: '11h', athletes: 15, label: '11:00 AM (Low)' },
+    { hour: '11h', athletes: 15, label: '11:00 AM' },
     { hour: '13h', athletes: 12, label: '01:00 PM' },
     { hour: '16h', athletes: 28, label: '04:00 PM' },
-    { hour: '18h', athletes: 58, label: '06:00 PM (Prime Evening Peak)' },
+    { hour: '18h', athletes: 58, label: '06:00 PM (Evening Peak)' },
     { hour: '19h', athletes: 52, label: '07:00 PM' },
     { hour: '20h', athletes: 44, label: '08:00 PM' },
     { hour: '21h', athletes: 22, label: '09:00 PM' }
@@ -83,27 +74,15 @@ export const OwnerDashboard = () => {
   const maxFloorCapacity = 60;
   const occupancyRate = Math.round((currentAthletesOnFloor / maxFloorCapacity) * 100);
 
-  // 7-Day Revenue Velocity Sparkline Data
-  const revenueTrend = [
-    { day: 'Mon', rev: 28000 },
-    { day: 'Tue', rev: 35000 },
-    { day: 'Wed', rev: 42000 },
-    { day: 'Thu', rev: 38000 },
-    { day: 'Fri', rev: 64000 },
-    { day: 'Sat', rev: 72000 },
-    { day: 'Sun', rev: 55000 }
-  ];
-
-  // Quick Tactical Simulation Handlers
+  // Quick Action Handlers
   const handleSimulateQuickScan = () => {
     SoundEngine.playScanLaserBeep();
     const candidate = members[0] || { passId: 'PASS-TEST-99', name: 'Vikram Malhotra' };
     const res = AttendanceService.processQRScan(activeGym.id, candidate.passId, activeUser);
     if (res.success) {
       SoundEngine.playSuccessChime();
-      try { confetti({ particleCount: 50, spread: 60 }); } catch (e) {}
       refreshData();
-      addToast(`⚡ Turnstile Scan: ${candidate.name} passed through Reception Kiosk!`, 'success');
+      addToast(`Member check-in: ${candidate.name} verified at Front Desk`, 'success');
     }
   };
 
@@ -113,15 +92,14 @@ export const OwnerDashboard = () => {
     const randomName = names[Math.floor(Math.random() * names.length)];
     LeadService.createLeadFromPublicWebsite({
       gymId: activeGym.id,
-      name: `${randomName} (${Math.floor(100 + Math.random() * 900)})`,
+      name: `${randomName}`,
       phone: '+91 98200 ' + Math.floor(10000 + Math.random() * 90000),
       email: `${randomName.toLowerCase().replace(/\s/g, '')}@gmail.com`,
       goal: 'Hypertrophy & Strength',
-      source: 'Instagram Ad'
+      source: 'Website Trial'
     });
-    try { confetti({ particleCount: 60, spread: 50 }); } catch (e) {}
     refreshData();
-    addToast(`⚡ Inbound Lead: ${randomName} added to ${activeGym.name} CRM pipeline!`, 'success');
+    addToast(`New inquiry: ${randomName} added to leads pipeline`, 'info');
   };
 
   const handleRemoteUnlockGate = () => {
@@ -129,47 +107,45 @@ export const OwnerDashboard = () => {
     setTimeout(() => {
       SoundEngine.playSuccessChime();
       setRemoteGateOpen(true);
-      addToast(`⚡ Remote Signal Dispatched: Turnstile Gate 01 Released!`, 'success');
+      addToast(`Turnstile 01 released remotely`, 'success');
       setTimeout(() => setRemoteGateOpen(false), 4000);
-    }, 300);
+    }, 200);
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* Retention Risk Alert Banner */}
       {retentionAlerts.length > 0 && canAccessPage('page.retention') && (
         <div style={{
-          background: 'linear-gradient(90deg, rgba(239, 68, 68, 0.18), rgba(245, 158, 11, 0.12))',
-          border: '1px solid rgba(239, 68, 68, 0.45)',
+          background: 'rgba(239, 68, 68, 0.08)',
+          border: '1px solid rgba(239, 68, 68, 0.25)',
           borderRadius: 'var(--radius-md)',
-          padding: '16px 20px',
+          padding: '14px 18px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '12px',
-          boxShadow: '0 4px 20px rgba(239, 68, 68, 0.15)'
+          gap: '12px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ 
-              width: '40px', 
-              height: '40px', 
-              borderRadius: '50%', 
-              background: 'rgba(239, 68, 68, 0.25)', 
+              width: '32px', 
+              height: '32px', 
+              borderRadius: 'var(--radius-sm)', 
+              background: 'rgba(239, 68, 68, 0.15)', 
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
-              color: '#ef4444',
-              boxShadow: '0 0 12px rgba(239, 68, 68, 0.4)'
+              color: '#ef4444' 
             }}>
-              <AlertTriangle size={20} />
+              <AlertTriangle size={16} />
             </div>
             <div>
-              <strong style={{ fontSize: '15px', color: '#fff' }}>
-                Retention Engine Alert: {retentionAlerts.length} Member(s) at Churn Risk
+              <strong style={{ fontSize: '13px', color: '#f8fafc' }}>
+                Inactive Member Notice: {retentionAlerts.length} member(s) absent &gt; 14 days
               </strong>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
-                <strong>{retentionAlerts[0]?.memberName}</strong> hasn't checked in for {retentionAlerts[0]?.daysAbsent} days (historical average: {retentionAlerts[0]?.historicalRate} visits/wk).
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                {retentionAlerts[0]?.memberName} has not checked in for {retentionAlerts[0]?.daysAbsent} days (usual rate: {retentionAlerts[0]?.historicalRate} visits/week).
               </div>
             </div>
           </div>
@@ -180,118 +156,114 @@ export const OwnerDashboard = () => {
               background: '#ef4444', 
               color: '#fff', 
               border: 'none',
-              boxShadow: '0 2px 10px rgba(239, 68, 68, 0.4)',
-              fontWeight: '700'
+              fontWeight: '600'
             }}
             onClick={() => {
               SoundEngine.playClick();
               setActiveTab('retention');
             }}
           >
-            <span>Review & Send 1-Click WhatsApp</span>
-            <ArrowRight size={14} />
+            <span>Review Member</span>
+            <ArrowRight size={13} />
           </button>
         </div>
       )}
 
-      {/* Primary KPI Deck with Micro-Sparklines */}
+      {/* Primary KPI Deck */}
       <div className="stat-grid">
         {/* Active Members */}
-        <div className="stat-card" style={{ borderTop: '3px solid #3b82f6' }}>
+        <div className="stat-card">
           <div className="stat-header">
             <span className="stat-title">Active Members</span>
-            <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6' }}>
-              <Users size={18} />
+            <div className="stat-icon" style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#60a5fa' }}>
+              <Users size={16} />
             </div>
           </div>
           <div className="stat-value">{activeMembers.length}</div>
           <div className="stat-meta positive">
-            <span>● {members.length} Total Enrolled • 98.4% Retention</span>
+            <span>{members.length} enrolled members</span>
           </div>
         </div>
 
         {/* Revenue */}
         {canViewFeature('payment.viewRevenueSummary') ? (
-          <div className="stat-card" style={{ borderTop: '3px solid #10b981' }}>
+          <div className="stat-card">
             <div className="stat-header">
-              <span className="stat-title">Gross Revenue (MTD)</span>
-              <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981' }}>
-                <CreditCard size={18} />
+              <span className="stat-title">Revenue (MTD)</span>
+              <div className="stat-icon" style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#4ade80' }}>
+                <CreditCard size={16} />
               </div>
             </div>
             <div className="stat-value">₹{totalRevenue.toLocaleString('en-IN')}</div>
             <div className="stat-meta positive" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <TrendingUp size={13} />
-              <span>{targetPercent}% of ₹{monthlyTarget.toLocaleString('en-IN')} Target</span>
+              <TrendingUp size={12} />
+              <span>{targetPercent}% of ₹{monthlyTarget.toLocaleString('en-IN')} monthly target</span>
             </div>
             {/* Target Progress Bar */}
-            <div style={{ width: '100%', height: '4px', background: 'var(--surface-border)', borderRadius: '2px', marginTop: '10px', overflow: 'hidden' }}>
-              <div style={{ width: `${targetPercent}%`, height: '100%', background: '#10b981' }} />
+            <div style={{ width: '100%', height: '3px', background: 'var(--surface-border)', borderRadius: '2px', marginTop: '10px', overflow: 'hidden' }}>
+              <div style={{ width: `${targetPercent}%`, height: '100%', background: '#22c55e' }} />
             </div>
           </div>
         ) : (
-          <div className="stat-card" style={{ opacity: 0.7 }}>
+          <div className="stat-card" style={{ opacity: 0.6 }}>
             <div className="stat-header">
-              <span className="stat-title">Billing Metrics</span>
+              <span className="stat-title">Revenue (MTD)</span>
               <div className="stat-icon" style={{ background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-muted)' }}>
-                <CreditCard size={18} />
+                <CreditCard size={16} />
               </div>
             </div>
-            <div className="stat-value" style={{ fontSize: '18px', color: 'var(--text-muted)' }}>Restricted</div>
-            <div className="stat-meta">Hidden for role: {activeUser.roleId}</div>
+            <div className="stat-value" style={{ fontSize: '16px', color: 'var(--text-muted)' }}>Restricted</div>
+            <div className="stat-meta">Access restricted for this role</div>
           </div>
         )}
 
         {/* Today's Check-ins */}
-        <div className="stat-card" style={{ borderTop: '3px solid var(--primary)' }}>
+        <div className="stat-card">
           <div className="stat-header">
             <span className="stat-title">Today's Check-ins</span>
-            <div className="stat-icon" style={{ background: 'rgba(255, 87, 34, 0.15)', color: 'var(--primary)' }}>
-              <QrCode size={18} />
+            <div className="stat-icon" style={{ background: 'rgba(249, 115, 22, 0.1)', color: 'var(--primary)' }}>
+              <QrCode size={16} />
             </div>
           </div>
           <div className="stat-value">{attendance.length}</div>
           <div className="stat-meta positive">
-            <span>Live check-in stream verified • 100% keyless</span>
+            <span>All entries verified via turnstile</span>
           </div>
         </div>
 
         {/* Inbound Leads */}
-        <div className="stat-card" style={{ borderTop: '3px solid #f59e0b' }}>
+        <div className="stat-card">
           <div className="stat-header">
-            <span className="stat-title">Inbound Trial Leads</span>
-            <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b' }}>
-              <Flame size={18} />
+            <span className="stat-title">New Inquiries</span>
+            <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#fbbf24' }}>
+              <Clock size={16} />
             </div>
           </div>
-          <div className="stat-value">{newLeads.length} New</div>
+          <div className="stat-value">{newLeads.length}</div>
           <div className="stat-meta">
-            <span>{leads.length} active prospects in sales pipeline</span>
+            <span>{leads.length} total in CRM pipeline</span>
           </div>
         </div>
       </div>
 
-      {/* Interactive Facility Floor Blueprint & Telemetry */}
-      <div className="glass-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px', flexWrap: 'wrap', gap: '12px' }}>
+      {/* Facility Floor Plan & Bay Availability */}
+      <div className="glass-card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span className="badge badge-purple">CALIBRATED BLUEPRINT</span>
-              <h3 style={{ fontSize: '18px', fontWeight: '800', margin: 0 }}>
-                Athletic Floor Map & Live Bay Utilization
-              </h3>
-            </div>
-            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              Click any Olympic drop platform or recovery suite to inspect active athletes, barbell loads, and coach bookings.
+            <h3 style={{ fontSize: '15px', fontWeight: '700', margin: 0 }}>
+              Platform & Area Availability
+            </h3>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+              Current status of lifting platforms, turf, and recovery amenities.
             </p>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff5722' }} /> 6 Occupied
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '11px', color: 'var(--text-muted)' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--primary)' }} /> In Use (6)
             </span>
-            <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981' }} /> 4 Ready
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e' }} /> Available (4)
             </span>
           </div>
         </div>
@@ -305,26 +277,25 @@ export const OwnerDashboard = () => {
                 key={bay.id}
                 className={`blueprint-bay ${bay.status}`}
                 style={{
-                  border: isSelected ? '2px solid var(--primary)' : undefined,
-                  boxShadow: isSelected ? '0 0 16px rgba(255, 87, 34, 0.4)' : undefined
+                  borderColor: isSelected ? 'rgba(255, 255, 255, 0.4)' : undefined
                 }}
                 onClick={() => {
                   SoundEngine.playClick();
                   setSelectedBay(isSelected ? null : bay);
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <strong style={{ fontSize: '12px', color: '#fff' }}>{bay.name}</strong>
-                  <span className={`badge ${bay.status === 'occupied' ? 'badge-danger' : 'badge-success'}`} style={{ fontSize: '8px', padding: '1px 5px' }}>
-                    {bay.status === 'occupied' ? 'ACTIVE' : 'READY'}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <strong style={{ fontSize: '12px', color: 'var(--text-main)' }}>{bay.name}</strong>
+                  <span className={`badge ${bay.status === 'occupied' ? 'badge-warning' : 'badge-success'}`} style={{ fontSize: '9px', padding: '1px 5px' }}>
+                    {bay.status === 'occupied' ? 'In Use' : 'Open'}
                   </span>
                 </div>
-                <div style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3' }}>
+                <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                   {bay.type}
                 </div>
                 {bay.athlete && (
-                  <div style={{ fontSize: '10px', color: '#ffd600', marginTop: '6px', fontWeight: '600' }}>
-                    ● {bay.athlete}
+                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
+                    {bay.athlete}
                   </div>
                 )}
               </div>
@@ -335,30 +306,29 @@ export const OwnerDashboard = () => {
         {/* Selected Bay Inspection Drawer */}
         {selectedBay && (
           <div style={{
-            marginTop: '16px',
-            padding: '16px 20px',
+            marginTop: '14px',
+            padding: '14px 18px',
             background: 'var(--bg-dark)',
-            border: '1px solid var(--primary)',
-            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--surface-border)',
+            borderRadius: 'var(--radius-sm)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '14px',
-            animation: 'modalPop 0.2s ease-out'
+            gap: '12px'
           }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Dumbbell size={16} color="var(--primary)" />
-                <strong style={{ fontSize: '14px', color: '#fff' }}>{selectedBay.name} — {selectedBay.type}</strong>
-                <span className={`badge ${selectedBay.status === 'occupied' ? 'badge-danger' : 'badge-success'}`}>
-                  {selectedBay.status.toUpperCase()}
+                <Dumbbell size={14} color="var(--primary)" />
+                <strong style={{ fontSize: '13px', color: 'var(--text-main)' }}>{selectedBay.name} — {selectedBay.type}</strong>
+                <span className={`badge ${selectedBay.status === 'occupied' ? 'badge-warning' : 'badge-success'}`}>
+                  {selectedBay.status === 'occupied' ? 'In Use' : 'Available'}
                 </span>
               </div>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
+              <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
                 {selectedBay.athlete 
-                  ? `Active Athlete: ${selectedBay.athlete} • Target Session: ${selectedBay.exercise}`
-                  : 'Platform is sanitized, calibrated, and immediately open for drop-in or scheduled class.'}
+                  ? `Member: ${selectedBay.athlete} • Activity: ${selectedBay.exercise}`
+                  : 'Platform is open for walk-ins or scheduled coaching.'}
               </div>
             </div>
 
@@ -367,69 +337,58 @@ export const OwnerDashboard = () => {
                 className="btn btn-secondary btn-sm"
                 onClick={() => {
                   SoundEngine.playClick();
-                  // toggle status
                   setBays(bays.map(b => b.id === selectedBay.id ? { ...b, status: b.status === 'occupied' ? 'available' : 'occupied', athlete: b.status === 'occupied' ? null : activeUser.name } : b));
                   setSelectedBay(null);
                   addToast(`Platform status updated`, 'info');
                 }}
               >
-                Toggle Occupancy
+                Toggle Status
               </button>
               <button 
-                className="btn btn-primary btn-sm"
+                className="btn btn-secondary btn-sm"
                 onClick={() => setSelectedBay(null)}
               >
-                Close Inspector
+                Close
               </button>
             </div>
           </div>
         )}
       </div>
 
-      {/* Real-Time Facility Telemetry & Heatmap Widget */}
-      <div className="glass-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '20px' }}>
+      {/* Hourly Floor Traffic & Occupancy */}
+      <div className="glass-card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px', marginBottom: '16px' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span className="badge badge-success">LIVE SENSORS</span>
-              <h3 style={{ fontSize: '18px', fontWeight: '800', margin: 0 }}>
-                Athletic Floor Occupancy & Hourly Traffic Heatmap
-              </h3>
-            </div>
-            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              Real-time turnstile telemetry monitoring Olympic lifting platforms, turf, and cardio mezzanine.
+            <h3 style={{ fontSize: '15px', fontWeight: '700', margin: 0 }}>
+              Floor Occupancy & Traffic by Hour
+            </h3>
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+              Estimated active capacity across weight room, platforms, and turf.
             </p>
           </div>
 
-          {/* Live Occupancy Gauge Pill */}
           <div style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: '14px', 
+            gap: '12px', 
             background: 'var(--bg-dark)', 
-            padding: '10px 18px', 
-            borderRadius: 'var(--radius-md)', 
+            padding: '8px 14px', 
+            borderRadius: 'var(--radius-sm)', 
             border: '1px solid var(--surface-border)' 
           }}>
             <div>
               <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Current Occupancy</div>
-              <div style={{ fontSize: '18px', fontWeight: '900', color: occupancyRate > 80 ? '#ef4444' : '#10b981' }}>
-                {currentAthletesOnFloor} <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>/ {maxFloorCapacity} Max ({occupancyRate}%)</span>
+              <div style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-main)' }}>
+                {currentAthletesOnFloor} / {maxFloorCapacity} athletes ({occupancyRate}%)
               </div>
             </div>
-            <div style={{ width: '40px', height: '40px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <svg width="40" height="40" viewBox="0 0 36 36">
-                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="3" />
-                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--primary)" strokeWidth="3" strokeDasharray={`${occupancyRate}, 100`} />
-              </svg>
-              <Activity size={14} color="var(--primary)" style={{ position: 'absolute' }} />
-            </div>
+            <Activity size={16} color="var(--primary)" />
           </div>
         </div>
 
         {/* Hourly Traffic Bar Histogram */}
-        <div style={{ marginTop: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', height: '110px', gap: '8px', padding: '0 6px 12px' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'flex-end', height: '90px', gap: '6px', padding: '0 4px 8px' }}>
             {hourlyTraffic.map((item, idx) => {
               const heightPercent = Math.round((item.athletes / 60) * 100);
               const isPeak = item.athletes >= 48;
@@ -452,73 +411,53 @@ export const OwnerDashboard = () => {
                   <div style={{
                     width: '100%',
                     height: `${heightPercent}%`,
-                    background: isPeak 
-                      ? 'linear-gradient(180deg, #ff5722 0%, #f4511e 100%)' 
-                      : 'linear-gradient(180deg, rgba(59, 130, 246, 0.8) 0%, rgba(59, 130, 246, 0.3) 100%)',
-                    borderRadius: '4px 4px 0 0',
-                    transition: 'all 0.2s',
-                    transform: isHovered ? 'scaleY(1.08)' : 'scaleY(1)',
-                    boxShadow: isPeak ? '0 0 12px rgba(255, 87, 34, 0.4)' : 'none',
-                    opacity: hoveredHour !== null && !isHovered ? 0.4 : 1
+                    background: isPeak ? 'var(--primary)' : 'var(--surface-border-hover)',
+                    borderRadius: '2px 2px 0 0',
+                    transition: 'all 0.15s',
+                    opacity: hoveredHour !== null && !isHovered ? 0.35 : 1
                   }} />
-                  <span style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '6px' }}>{item.hour}</span>
+                  <span style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '4px' }}>{item.hour}</span>
                 </div>
               );
             })}
           </div>
 
-          <div style={{ fontSize: '11px', color: 'var(--text-muted)', background: 'var(--bg-dark)', padding: '8px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
+          <div style={{ fontSize: '11px', color: 'var(--text-muted)', background: 'var(--bg-dark)', padding: '6px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
             {hoveredHour !== null ? (
-              <span><strong>{hourlyTraffic[hoveredHour].label}:</strong> {hourlyTraffic[hoveredHour].athletes} Estimated active athletes</span>
+              <span><strong>{hourlyTraffic[hoveredHour].label}:</strong> {hourlyTraffic[hoveredHour].athletes} estimated athletes</span>
             ) : (
-              <span>💡 Peak training periods occur at <strong>07:00 AM (snatch & clean squads)</strong> and <strong>06:00 PM (executive conditioning)</strong>.</span>
+              <span>Peak hours are typically 07:00 – 08:30 AM and 06:00 – 07:30 PM.</span>
             )}
           </div>
         </div>
       </div>
 
-      {/* Tactical Quick Action Deck & Turnstile Hardware Release */}
+      {/* Front Desk & Turnstile Controls */}
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between', 
         flexWrap: 'wrap', 
-        gap: '14px',
-        padding: '18px 22px',
+        gap: '12px',
+        padding: '14px 18px',
         background: 'var(--bg-card)',
-        border: `1px solid ${remoteGateOpen ? '#10b981' : 'var(--surface-border)'}`,
-        borderRadius: 'var(--radius-md)',
-        boxShadow: remoteGateOpen ? '0 0 24px rgba(16, 185, 129, 0.3)' : 'none',
-        transition: 'all 0.3s'
+        border: '1px solid var(--surface-border)',
+        borderRadius: 'var(--radius-md)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ 
-            width: '36px', 
-            height: '36px', 
-            borderRadius: 'var(--radius-sm)', 
-            background: remoteGateOpen ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 87, 34, 0.15)', 
-            color: remoteGateOpen ? '#10b981' : 'var(--primary)',
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center'
-          }}>
-            {remoteGateOpen ? <Unlock size={18} /> : <Zap size={18} />}
-          </div>
-          <div>
-            <strong style={{ fontSize: '14px', color: '#fff' }}>
-              {remoteGateOpen ? 'TURNSTILE 01: GATE RELEASED' : 'Tactical Operations Deck'}
-            </strong>
-            <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-              Hardware Telemetry: Optical Camera Online • RFID Solenoid Ready
-            </div>
+        <div>
+          <strong style={{ fontSize: '13px', color: 'var(--text-main)' }}>
+            {remoteGateOpen ? 'Turnstile 01: Gate Released' : 'Front Desk Controls'}
+          </strong>
+          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+            Turnstile 01 hardware online • Optical QR reader ready
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           <button 
-            className="btn btn-primary btn-sm"
+            className="btn btn-secondary btn-sm"
             onClick={handleRemoteUnlockGate}
-            style={{ background: remoteGateOpen ? '#10b981' : undefined, borderColor: remoteGateOpen ? '#10b981' : undefined }}
+            style={{ color: remoteGateOpen ? '#22c55e' : undefined }}
           >
             <Unlock size={13} />
             <span>Remote Unlock Turnstile</span>
@@ -528,28 +467,28 @@ export const OwnerDashboard = () => {
             className="btn btn-secondary btn-sm"
             onClick={handleSimulateQuickScan}
           >
-            <QrCode size={13} color="var(--primary)" />
-            <span>Simulate Member QR Tap</span>
+            <QrCode size={13} />
+            <span>Test QR Check-in</span>
           </button>
 
           <button 
             className="btn btn-secondary btn-sm"
             onClick={handleSimulateLead}
           >
-            <Plus size={13} color="#f59e0b" />
-            <span>Simulate Inbound Lead</span>
+            <Plus size={13} />
+            <span>Test Inbound Lead</span>
           </button>
         </div>
       </div>
 
-      {/* Main Operational Split: Classes & Live Attendance Stream */}
+      {/* Classes & Live Attendance Stream */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         {/* Today's Class Schedule */}
         <div className="glass-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Calendar size={18} style={{ color: 'var(--primary)' }} />
-              <span>Today's Group Sessions</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Calendar size={15} style={{ color: 'var(--primary)' }} />
+              <span>Today's Classes</span>
             </h3>
             <button 
               className="btn btn-secondary btn-sm"
@@ -558,14 +497,14 @@ export const OwnerDashboard = () => {
                 setActiveTab('classes');
               }}
             >
-              All Classes
+              View Schedule
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {classes.map(cls => (
               <div key={cls.id} style={{
-                padding: '12px',
+                padding: '10px 12px',
                 background: 'var(--bg-dark)',
                 borderRadius: 'var(--radius-sm)',
                 border: '1px solid var(--surface-border)',
@@ -581,7 +520,7 @@ export const OwnerDashboard = () => {
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
-                  <span className={`badge ${cls.bookedCount >= cls.capacity ? 'badge-danger' : 'badge-info'}`}>
+                  <span className={`badge ${cls.bookedCount >= cls.capacity ? 'badge-danger' : 'badge-info'}`} style={{ fontSize: '10px' }}>
                     {cls.bookedCount} / {cls.capacity} Booked
                   </span>
                 </div>
@@ -592,10 +531,10 @@ export const OwnerDashboard = () => {
 
         {/* Live Attendance Check-in Stream */}
         <div className="glass-card">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <UserCheck size={18} style={{ color: '#10b981' }} />
-              <span>Live Attendance Stream</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <UserCheck size={15} style={{ color: '#22c55e' }} />
+              <span>Recent Check-ins</span>
             </h3>
             <button 
               className="btn btn-primary btn-sm"
@@ -604,11 +543,11 @@ export const OwnerDashboard = () => {
                 setActiveTab('attendance');
               }}
             >
-              Open QR Scanner
+              Open Scanner
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {attendance.slice(0, 5).map(att => (
               <div key={att.id} style={{
                 display: 'flex',
@@ -621,22 +560,21 @@ export const OwnerDashboard = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{ 
-                    width: '8px', 
-                    height: '8px', 
+                    width: '6px', 
+                    height: '6px', 
                     borderRadius: '50%', 
-                    background: '#10b981',
-                    boxShadow: '0 0 8px #10b981'
+                    background: '#22c55e'
                   }} />
                   <div>
                     <strong style={{ fontSize: '13px' }}>{att.memberName}</strong>
-                    <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>Pass ID: {att.passId}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Pass: {att.passId}</div>
                   </div>
                 </div>
 
                 <div style={{ textAlign: 'right', fontSize: '11px', color: 'var(--text-muted)' }}>
                   <div>{att.time}</div>
-                  <span className="badge badge-success" style={{ fontSize: '9px', padding: '1px 6px' }}>
-                    {att.checkInMethod} Verified
+                  <span className="badge badge-success" style={{ fontSize: '9px', padding: '1px 5px' }}>
+                    {att.checkInMethod}
                   </span>
                 </div>
               </div>

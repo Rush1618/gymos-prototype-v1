@@ -66,7 +66,7 @@ export const PaymentsView = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Invoices & Billing Transactions</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 28: Simulated payment processing supporting UPI, Card, Cash, and Bank Transfer with role-gated refunds.
+            Track member subscription payments, record transactions, and process role-authorized refunds across UPI, Card, and Net Banking.
           </p>
         </div>
 

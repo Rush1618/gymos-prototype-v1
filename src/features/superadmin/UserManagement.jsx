@@ -87,8 +87,7 @@ export const UserManagement = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Platform Users & User Overrides</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)', maxWidth: '650px', marginTop: '4px' }}>
-            Section 12: When standard role permissions aren't enough, Super Admin can set explicit user overrides 
-            (e.g., granting Trainer Arjun Mehta access to Analytics).
+            Configure explicit user-level permission overrides for individual staff members who require elevated access beyond their assigned role.
           </p>
         </div>
 
@@ -158,7 +157,7 @@ export const UserManagement = () => {
                         <strong>{user.name}</strong>
                         {isArjunSpecial && (
                           <span style={{ marginLeft: '6px', fontSize: '10px', background: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa', padding: '1px 6px', borderRadius: '4px', fontWeight: '700' }}>
-                            Section 12 Demo User
+                            Elevated Access
                           </span>
                         )}
                         <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{user.email} • {user.phone}</div>

@@ -108,8 +108,8 @@ export const PublicWebsitePage = () => {
   // Mock interactive classes for schedule section
   const sampleClasses = [
     { id: 'c1', title: 'Olympic Snatch & Clean Workshop', coach: 'Arjun Mehta', time: '07:00 AM - 08:15 AM', type: 'Strength', spots: 3, badge: 'Popular' },
-    { id: 'c2', title: 'VO2 Max MetCon & Sled Drills', coach: 'Maya Sen', time: '09:00 AM - 10:00 AM', type: 'HIIT', spots: 5, badge: 'High Burn' },
-    { id: 'c3', title: 'Infrared Mobility & Contrast Therapy', coach: 'Dr. Kabir Roy', time: '05:30 PM - 06:30 PM', type: 'Recovery', spots: 2, badge: 'Relax' },
+    { id: 'c2', title: 'VO2 Max MetCon & Sled Drills', coach: 'Maya Sen', time: '09:00 AM - 10:00 AM', type: 'HIIT', spots: 5, badge: 'Conditioning' },
+    { id: 'c3', title: 'Infrared Mobility & Contrast Therapy', coach: 'Dr. Kabir Roy', time: '05:30 PM - 06:30 PM', type: 'Recovery', spots: 2, badge: 'Recovery' },
     { id: 'c4', title: 'Heavy Barbell Hypertrophy Squad', coach: 'Arjun Mehta', time: '07:00 PM - 08:30 PM', type: 'Strength', spots: 4, badge: 'Advanced' }
   ];
 
@@ -138,26 +138,21 @@ export const PublicWebsitePage = () => {
 
   return (
     <div style={{ 
-      background: theme.bgDark || '#0d0f12', 
+      background: 'var(--bg-app)', 
       minHeight: '100vh', 
-      color: theme.textMain || '#fff', 
+      color: 'var(--text-main)', 
       fontFamily: theme.fontFamily || 'var(--brand-font)',
       position: 'relative',
       overflowX: 'hidden'
     }}>
-      {/* Framer-grade Ambient Glow Orbs */}
-      <div className="glow-orb" style={{ top: '150px', left: '-100px', width: '450px', height: '450px', background: theme.primaryColor || '#ff5722' }} />
-      <div className="glow-orb" style={{ top: '650px', right: '-120px', width: '500px', height: '500px', background: '#3b82f6' }} />
-      <div className="glow-orb" style={{ top: '1800px', left: '20%', width: '600px', height: '600px', background: theme.primaryColor || '#ff5722' }} />
-
       {/* Public Sticky Glass Navbar */}
       <nav style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '16px 48px',
-        borderBottom: `1px solid ${theme.borderColor || 'rgba(255, 87, 34, 0.2)'}`,
-        background: 'rgba(10, 12, 16, 0.88)',
+        borderBottom: '1px solid var(--surface-border)',
+        background: 'var(--glass-bg)',
         backdropFilter: 'blur(20px)',
         position: 'sticky',
         top: '45px', // under master bar
@@ -165,34 +160,35 @@ export const PublicWebsitePage = () => {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <div style={{
-            width: '42px',
-            height: '42px',
+            width: '40px',
+            height: '40px',
             borderRadius: 'var(--radius-sm)',
             background: theme.primaryColor || '#ff5722',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '22px',
+            fontSize: '18px',
+            fontWeight: '900',
             color: '#fff',
-            boxShadow: `0 0 18px ${theme.primaryColor || '#ff5722'}88`
+            border: '1px solid rgba(255, 255, 255, 0.15)'
           }}>
-            {activeGym.logo || '⚡'}
+            {activeGym.logo || 'IP'}
           </div>
           <div>
-            <h1 style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '-0.5px', margin: 0 }}>
+            <h1 style={{ fontSize: '18px', fontWeight: '800', letterSpacing: '-0.3px', margin: 0 }}>
               {activeGym.name}
             </h1>
-            <span style={{ fontSize: '11px', color: theme.textMuted || '#94a3b8', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <MapPin size={11} /> {activeGym.city} • {activeGym.area}
             </span>
           </div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
-          <a href="#memberships" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '13px', fontWeight: '600', transition: 'color 0.2s' }}>Pricing</a>
-          <a href="#classes" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '13px', fontWeight: '600', transition: 'color 0.2s' }}>Classes</a>
-          <a href="#coaches" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '13px', fontWeight: '600', transition: 'color 0.2s' }}>Head Coaches</a>
-          <a href="#faq" style={{ color: '#cbd5e1', textDecoration: 'none', fontSize: '13px', fontWeight: '600', transition: 'color 0.2s' }}>FAQ</a>
+          <a href="#memberships" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '13px', fontWeight: '500', transition: 'color 0.2s' }}>Memberships</a>
+          <a href="#classes" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '13px', fontWeight: '500', transition: 'color 0.2s' }}>Classes</a>
+          <a href="#coaches" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '13px', fontWeight: '500', transition: 'color 0.2s' }}>Coaching Staff</a>
+          <a href="#faq" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '13px', fontWeight: '500', transition: 'color 0.2s' }}>FAQ</a>
 
           <button 
             className="btn btn-primary btn-sm"
@@ -202,8 +198,7 @@ export const PublicWebsitePage = () => {
             }}
             style={{ 
               background: theme.primaryColor, 
-              borderColor: theme.primaryColor,
-              boxShadow: `0 0 16px ${theme.primaryColor || '#ff5722'}66`
+              borderColor: theme.primaryColor
             }}
           >
             <Sparkles size={14} />
@@ -212,10 +207,10 @@ export const PublicWebsitePage = () => {
         </div>
       </nav>
 
-      {/* Hero Section with Photorealistic Gym Visual Banner */}
+      {/* Hero Section */}
       <section style={{
         position: 'relative',
-        padding: '100px 48px 120px',
+        padding: '90px 48px 110px',
         maxWidth: '1280px',
         margin: '0 auto',
         textAlign: 'center',
@@ -226,11 +221,11 @@ export const PublicWebsitePage = () => {
           position: 'absolute',
           inset: '20px 20px 0 20px',
           borderRadius: 'var(--radius-xl)',
-          backgroundImage: 'linear-gradient(180deg, rgba(13,15,18,0.72) 0%, rgba(13,15,18,0.96) 90%), url("./images/gym-hero.jpg")',
+          backgroundImage: 'linear-gradient(180deg, rgba(13,15,18,0.78) 0%, rgba(13,15,18,0.97) 90%), url("./images/gym-hero.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           border: '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.8), inset 0 0 80px rgba(0,0,0,0.8)',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.8)',
           zIndex: -1
         }} />
 
@@ -240,54 +235,50 @@ export const PublicWebsitePage = () => {
             display: 'inline-flex',
             alignItems: 'center',
             gap: '10px',
-            background: 'rgba(255, 255, 255, 0.06)',
+            background: 'rgba(22, 27, 34, 0.85)',
             backdropFilter: 'blur(12px)',
-            border: `1px solid ${theme.borderColor || 'rgba(255, 87, 34, 0.35)'}`,
-            padding: '7px 20px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            padding: '6px 18px',
             borderRadius: 'var(--radius-full)',
             marginBottom: '26px',
             fontSize: '12px',
-            fontWeight: '700',
-            color: '#ffffff',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.4)'
+            fontWeight: '600',
+            color: '#e2e8f0'
           }}>
             <span style={{ 
               width: '8px', 
               height: '8px', 
               borderRadius: '50%', 
               background: '#10b981', 
-              boxShadow: '0 0 10px #10b981',
-              display: 'inline-block',
-              animation: 'pulseGlow 2s infinite'
+              display: 'inline-block'
             }} />
             <span>42 Athletes Currently Training • Turnstiles Online 24/7</span>
           </div>
 
           <h2 style={{
-            fontSize: '56px',
+            fontSize: '52px',
             fontWeight: '900',
-            letterSpacing: '-1.8px',
-            lineHeight: '1.08',
-            maxWidth: '960px',
-            margin: '0 auto 24px',
-            color: '#ffffff',
-            textShadow: '0 4px 24px rgba(0,0,0,0.7)'
+            letterSpacing: '-1.5px',
+            lineHeight: '1.12',
+            maxWidth: '920px',
+            margin: '0 auto 22px',
+            color: '#ffffff'
           }}>
-            {theme.heroHeadline || `Unleash Human Peak Performance at ${activeGym.name}`}
+            {theme.heroHeadline || `Strength & Conditioning in ${activeGym.city}`}
           </h2>
 
           <p style={{
-            fontSize: '19px',
-            color: '#cbd5e1',
-            maxWidth: '720px',
-            margin: '0 auto 40px',
+            fontSize: '18px',
+            color: '#94a3b8',
+            maxWidth: '680px',
+            margin: '0 auto 36px',
             lineHeight: '1.6',
             fontWeight: '400'
           }}>
-            {theme.heroSubheadline || `Olympic calibrated Eleiko platforms, high-density sprint turf, contrast therapy tubs, and automated keyless QR access in ${activeGym.city}.`}
+            {theme.heroSubheadline || `Olympic competition platforms, functional conditioning turf, contrast therapy tubs, and automated keyless access in ${activeGym.city}.`}
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
             <button 
               className="btn btn-primary btn-lg"
               onClick={() => {
@@ -296,14 +287,13 @@ export const PublicWebsitePage = () => {
               }}
               style={{ 
                 background: theme.primaryColor, 
-                borderColor: theme.primaryColor, 
-                boxShadow: `0 0 32px ${theme.primaryColor || '#ff5722'}77`,
-                padding: '16px 36px',
-                fontSize: '16px'
+                borderColor: theme.primaryColor,
+                padding: '14px 32px',
+                fontSize: '15px'
               }}
             >
-              <Sparkles size={20} />
               <span>Claim Free 3-Day Pass</span>
+              <ArrowRight size={16} />
             </button>
 
             <button 
@@ -314,73 +304,72 @@ export const PublicWebsitePage = () => {
                 setActiveTab('qr_pass');
               }}
               style={{
-                backdropFilter: 'blur(12px)',
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                padding: '16px 30px',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                padding: '14px 28px',
                 fontSize: '15px'
               }}
             >
-              <Zap size={18} color="#ffd600" />
-              <span>Simulate Member Digital QR Pass</span>
+              <span>Explore Member Portal</span>
             </button>
           </div>
 
           {/* Social Proof Metric Bar */}
           <div style={{
-            marginTop: '70px',
+            marginTop: '60px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: '40px',
+            gap: '36px',
             flexWrap: 'wrap',
-            padding: '24px 32px',
-            background: 'rgba(10, 12, 16, 0.75)',
+            padding: '20px 32px',
+            background: 'var(--bg-card)',
             backdropFilter: 'blur(16px)',
             borderRadius: 'var(--radius-lg)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            maxWidth: '880px',
-            margin: '70px auto 0'
+            border: '1px solid var(--surface-border)',
+            boxShadow: 'var(--shadow-md)',
+            maxWidth: '820px',
+            margin: '60px auto 0'
           }}>
             <div>
-              <div style={{ fontSize: '28px', fontWeight: '900', color: theme.primaryColor || '#ff5722', letterSpacing: '-0.5px' }}>4.97 ★★★★★</div>
-              <div style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>420+ Google Reviews</div>
+              <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>4.9 / 5.0</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>420+ Member Reviews</div>
             </div>
-            <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.12)' }} />
+            <div style={{ width: '1px', height: '32px', background: 'var(--surface-border)' }} />
             <div>
-              <div style={{ fontSize: '28px', fontWeight: '900', color: '#ffffff', letterSpacing: '-0.5px' }}>8 Platforms</div>
-              <div style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>Eleiko Calibrated Rig</div>
+              <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>8 Platforms</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>Eleiko Calibrated Rig</div>
             </div>
-            <div style={{ width: '1px', height: '36px', background: 'rgba(255, 255, 255, 0.12)' }} />
+            <div style={{ width: '1px', height: '32px', background: 'var(--surface-border)' }} />
             <div>
-              <div style={{ fontSize: '28px', fontWeight: '900', color: '#00e5ff', letterSpacing: '-0.5px' }}>100% Keyless</div>
-              <div style={{ fontSize: '11px', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>Turnstile QR & NFC Pass</div>
+              <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>Keyless Entry</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '2px' }}>Digital QR & NFC Pass</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Framer-Grade Membership Pricing Calculator */}
+      {/* Membership Pricing Calculator */}
       <section id="memberships" style={{ padding: '80px 48px', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '44px' }}>
-          <span className="badge badge-info" style={{ marginBottom: '12px', fontSize: '11px', letterSpacing: '1px' }}>
-            TRANSPARENT PRICING CALCULATOR
+          <span className="badge badge-info" style={{ marginBottom: '12px', fontSize: '11px', letterSpacing: '0.5px' }}>
+            MEMBERSHIP PLANS
           </span>
-          <h3 style={{ fontSize: '38px', fontWeight: '900', letterSpacing: '-1px' }}>
-            Choose Your Commitment Level
+          <h3 style={{ fontSize: '36px', fontWeight: '900', letterSpacing: '-0.8px' }}>
+            Choose Your Membership
           </h3>
-          <p style={{ color: theme.textMuted, fontSize: '15px', marginTop: '8px' }}>
-            Slide duration to unlock progressive loyalty pricing. No joiner fees, no hidden maintenance.
+          <p style={{ color: 'var(--text-muted)', fontSize: '15px', marginTop: '8px' }}>
+            Select your preferred commitment period. No enrollment fees, transparent monthly pricing.
           </p>
         </div>
 
-        {/* Interactive Pricing Card Box */}
+        {/* Pricing Card Box */}
         <div className="glass-card" style={{ 
           maxWidth: '920px', 
           margin: '0 auto', 
           padding: '40px', 
-          border: `2px solid ${theme.borderColor || 'rgba(255, 87, 34, 0.3)'}`,
-          boxShadow: '0 20px 50px rgba(0,0,0,0.6)'
+          border: '1px solid var(--surface-border)',
+          boxShadow: 'var(--shadow-lg)'
         }}>
           {/* Duration Selector Tabs */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '32px', flexWrap: 'wrap' }}>
@@ -396,8 +385,8 @@ export const PublicWebsitePage = () => {
                   borderRadius: 'var(--radius-full)',
                   border: durationMonths === m ? `2px solid ${theme.primaryColor}` : '1px solid var(--surface-border)',
                   background: durationMonths === m ? 'rgba(255, 87, 34, 0.15)' : 'var(--bg-dark)',
-                  color: durationMonths === m ? '#ffffff' : 'var(--text-muted)',
-                  fontWeight: durationMonths === m ? '800' : '600',
+                  color: durationMonths === m ? 'var(--primary)' : 'var(--text-muted)',
+                  fontWeight: durationMonths === m ? '700' : '500',
                   fontSize: '14px',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
@@ -408,8 +397,8 @@ export const PublicWebsitePage = () => {
               >
                 <span>{m} {m === 1 ? 'Month' : 'Months'}</span>
                 {m === 12 && (
-                  <span style={{ fontSize: '10px', background: theme.primaryColor, color: '#fff', padding: '2px 6px', borderRadius: '10px' }}>
-                    SAVE 42%
+                  <span style={{ fontSize: '10px', background: theme.primaryColor, color: '#fff', padding: '2px 6px', borderRadius: '10px', fontWeight: '700' }}>
+                    Save 42%
                   </span>
                 )}
               </button>
@@ -419,9 +408,9 @@ export const PublicWebsitePage = () => {
           {/* Interactive Range Slider */}
           <div style={{ marginBottom: '32px', padding: '0 10px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '12px', color: 'var(--text-muted)' }}>
-              <span>Flexible (1 Month)</span>
+              <span>Monthly (1 Month)</span>
               <span>Dedicated (6 Months)</span>
-              <span style={{ color: theme.primaryColor, fontWeight: '700' }}>Annual Elite (12 Months)</span>
+              <span style={{ color: theme.primaryColor, fontWeight: '600' }}>Annual Commitment (12 Months)</span>
             </div>
             <input 
               type="range" 
@@ -452,18 +441,18 @@ export const PublicWebsitePage = () => {
           }}>
             <div>
               <div style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                Effective Monthly Investment
+                Effective Monthly Rate
               </div>
-              <div style={{ fontSize: '48px', fontWeight: '900', color: '#ffffff', letterSpacing: '-1.5px', margin: '6px 0' }}>
-                ₹{effectiveMonthly.toLocaleString()} <span style={{ fontSize: '16px', color: 'var(--text-muted)', fontWeight: '500' }}>/ month</span>
+              <div style={{ fontSize: '44px', fontWeight: '900', color: 'var(--text-main)', letterSpacing: '-1px', margin: '6px 0' }}>
+                ₹{effectiveMonthly.toLocaleString()} <span style={{ fontSize: '15px', color: 'var(--text-muted)', fontWeight: '500' }}>/ month</span>
               </div>
               
-              <div style={{ fontSize: '13px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '700' }}>
+              <div style={{ fontSize: '13px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '600' }}>
                 <Check size={16} /> Total Contract: ₹{totalAmount.toLocaleString()} ({durationMonths} Months)
               </div>
               {savings > 0 && (
-                <div style={{ fontSize: '12px', color: '#f59e0b', marginTop: '4px', fontWeight: '600' }}>
-                  ⚡ You save ₹{savings.toLocaleString()} compared to month-to-month rate!
+                <div style={{ fontSize: '12px', color: '#f59e0b', marginTop: '4px', fontWeight: '500' }}>
+                  Save ₹{savings.toLocaleString()} compared to month-to-month billing
                 </div>
               )}
 
@@ -489,14 +478,14 @@ export const PublicWebsitePage = () => {
                   }}
                   style={{ width: '16px', height: '16px', accentColor: theme.primaryColor }}
                 />
-                <span style={{ fontSize: '13px', fontWeight: '600' }}>
+                <span style={{ fontSize: '13px', fontWeight: '500' }}>
                   Include 4x Monthly 1-on-1 PT Sessions (+₹1,500/mo)
                 </span>
               </label>
             </div>
 
             <div style={{ background: 'var(--bg-dark)', padding: '24px', borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)' }}>
-              <h4 style={{ fontSize: '15px', fontWeight: '800', marginBottom: '16px', color: theme.primaryColor }}>
+              <h4 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '16px', color: theme.primaryColor }}>
                 All Memberships Include:
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13px' }}>
@@ -514,7 +503,7 @@ export const PublicWebsitePage = () => {
                 </div>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Check size={16} color="#10b981" /> 
-                  <span>AI Workout & Nutrition Log in Member Portal</span>
+                  <span>Workout & Attendance Log in Member Portal</span>
                 </div>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Check size={16} color="#10b981" /> 
@@ -536,24 +525,24 @@ export const PublicWebsitePage = () => {
                   padding: '12px'
                 }}
               >
-                Join Now with {durationMonths}-Month Pass
+                Select {durationMonths}-Month Membership
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Head Coaches Spotlight (Featuring Arjun Mehta portrait) */}
+      {/* Head Coaches Spotlight */}
       <section id="coaches" style={{ padding: '80px 48px', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-          <span className="badge badge-purple" style={{ marginBottom: '12px', fontSize: '11px', letterSpacing: '1px' }}>
-            ELITE PEDAGOGY & COACHING
+          <span className="badge badge-purple" style={{ marginBottom: '12px', fontSize: '11px', letterSpacing: '0.5px' }}>
+            COACHING STAFF
           </span>
-          <h3 style={{ fontSize: '38px', fontWeight: '900', letterSpacing: '-1px' }}>
-            Guided By Master Strength Practitioners
+          <h3 style={{ fontSize: '36px', fontWeight: '900', letterSpacing: '-0.8px' }}>
+            Experienced Coaching Team
           </h3>
           <p style={{ color: theme.textMuted, fontSize: '15px', marginTop: '8px' }}>
-            Every trainer is CSCS or Olympic certified. Zero generic fitness influencer advice.
+            Every coach is CSCS or Olympic certified with athlete development credentials.
           </p>
         </div>
 
@@ -648,18 +637,18 @@ export const PublicWebsitePage = () => {
         </div>
       </section>
 
-      {/* Interactive Class Schedule with Filter Tabs */}
+      {/* Class Schedule with Filter Tabs */}
       <section id="classes" style={{ padding: '80px 48px', maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '36px', flexWrap: 'wrap', gap: '20px' }}>
           <div>
-            <span className="badge badge-warning" style={{ marginBottom: '10px', fontSize: '11px', letterSpacing: '1px' }}>
-              DAILY PERFORMANCE SESSIONS
+            <span className="badge badge-warning" style={{ marginBottom: '10px', fontSize: '11px', letterSpacing: '0.5px' }}>
+              CLASS SCHEDULE
             </span>
-            <h3 style={{ fontSize: '36px', fontWeight: '900', letterSpacing: '-1px' }}>
-              Mastery Class Schedule
+            <h3 style={{ fontSize: '36px', fontWeight: '900', letterSpacing: '-0.8px' }}>
+              Daily Group Sessions
             </h3>
             <p style={{ color: theme.textMuted, fontSize: '14px', marginTop: '6px' }}>
-              Capped at 12 athletes per session for meticulous coach correction.
+              Capped at 12 athletes per session to ensure dedicated coach instruction.
             </p>
           </div>
 
@@ -679,7 +668,7 @@ export const PublicWebsitePage = () => {
                   padding: '6px 14px',
                   borderRadius: 'var(--radius-sm)',
                   fontSize: '12px',
-                  fontWeight: '700',
+                  fontWeight: '600',
                   cursor: 'pointer',
                   transition: 'all 0.15s'
                 }}
@@ -696,7 +685,7 @@ export const PublicWebsitePage = () => {
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                   <span className="badge badge-info" style={{ fontSize: '10px' }}>{cls.type}</span>
-                  <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: '700' }}>⚡ {cls.spots} Spots Left</span>
+                  <span style={{ fontSize: '11px', color: '#f59e0b', fontWeight: '600' }}>{cls.spots} spots remaining</span>
                 </div>
                 <h4 style={{ fontSize: '18px', fontWeight: '800', lineHeight: '1.3', marginBottom: '8px' }}>{cls.title}</h4>
                 <div style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
@@ -715,7 +704,7 @@ export const PublicWebsitePage = () => {
                 }}
                 style={{ marginTop: '20px', width: '100%' }}
               >
-                Reserve Free Guest Slot
+                Reserve Guest Slot
               </button>
             </div>
           ))}
@@ -751,7 +740,7 @@ export const PublicWebsitePage = () => {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <h4 style={{ fontSize: '16px', fontWeight: '700', margin: 0, color: isOpen ? theme.primaryColor : '#ffffff' }}>
+                  <h4 style={{ fontSize: '16px', fontWeight: '700', margin: 0, color: isOpen ? theme.primaryColor : 'var(--text-main)' }}>
                     {faq.q}
                   </h4>
                   {isOpen ? <ChevronDown size={18} color={theme.primaryColor} /> : <ChevronRight size={18} color="var(--text-muted)" />}
@@ -772,36 +761,36 @@ export const PublicWebsitePage = () => {
       <footer style={{ 
         padding: '48px 48px', 
         borderTop: '1px solid var(--surface-border)', 
-        background: 'rgba(10, 12, 16, 0.95)',
+        background: 'var(--bg-card)',
         textAlign: 'center', 
         fontSize: '13px', 
-        color: theme.textMuted,
+        color: 'var(--text-muted)',
         position: 'relative',
         zIndex: 1
       }}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-          <div style={{ width: '24px', height: '24px', borderRadius: '4px', background: theme.primaryColor, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>
-            {activeGym.logo || '⚡'}
+          <div style={{ width: '24px', height: '24px', borderRadius: '4px', background: theme.primaryColor, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: '800' }}>
+            {activeGym.logo || 'IP'}
           </div>
-          <strong style={{ color: '#fff', fontSize: '15px' }}>{activeGym.name}</strong>
+          <strong style={{ color: 'var(--text-main)', fontSize: '15px' }}>{activeGym.name}</strong>
         </div>
         <p style={{ maxWidth: '500px', margin: '0 auto 16px', fontSize: '12px', lineHeight: '1.5' }}>
-          High-performance physical training infrastructure powered by <strong>GymOS Agency Multi-Tenant Engine</strong>.
+          Performance strength & conditioning infrastructure powered by <strong>GymOS</strong>.
         </p>
         <p style={{ fontSize: '11px', color: '#64748b' }}>
-          © {new Date().getFullYear()} {activeGym.name}. All rights reserved. Remote Agency Deployment Active.
+          © {new Date().getFullYear()} {activeGym.name}. All rights reserved.
         </p>
       </footer>
 
-      {/* Free Trial Lead Modal (Loop 1: Visitor -> Lead Capture) */}
+      {/* Free Trial Lead Modal */}
       {showTrialModal && (
         <div className="modal-overlay">
           <div className="modal-card">
             <div className="modal-header">
               <div>
-                <h2>Claim 3-Day Complimentary Pass</h2>
+                <h2>Claim 3-Day Trial Pass</h2>
                 <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-                  Experience {activeGym.name}'s equipment, classes, and coaching.
+                  Experience {activeGym.name}'s equipment, classes, and coaching staff.
                 </p>
               </div>
               <button 

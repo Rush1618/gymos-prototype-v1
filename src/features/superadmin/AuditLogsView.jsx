@@ -25,7 +25,7 @@ export const AuditLogsView = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Platform Audit Trail</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 37: Full forensic record of Who, What, When, Gym, Role, User, Before, and After state.
+            Immutable compliance record of administrative actions, permission mutations, and access events across all tenants.
           </p>
         </div>
 

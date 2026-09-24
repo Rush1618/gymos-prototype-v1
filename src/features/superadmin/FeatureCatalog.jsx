@@ -41,7 +41,7 @@ export const FeatureCatalog = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Tenant Feature Flags</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 13: Feature flags control whether a feature exists for a specific gym tenant.
+            Toggle module availability and operational features per gym tenant independently of platform plans.
           </p>
         </div>
 

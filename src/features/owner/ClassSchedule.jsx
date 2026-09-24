@@ -58,7 +58,7 @@ export const ClassSchedule = () => {
         <div>
           <h2 style={{ fontSize: '20px', fontWeight: '800' }}>Group Fitness Class Schedule</h2>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            Section 27: Manage class capacity, trainer assignments, and member attendee rosters.
+            Manage class schedules, coach assignments, capacity caps, and member attendee rosters.
           </p>
         </div>
 
